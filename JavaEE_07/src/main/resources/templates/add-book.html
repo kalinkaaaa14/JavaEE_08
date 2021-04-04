@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Book</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Main</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="hasAnyRole('USER','ADMIN')">
+                    <a class="nav-link" href="favorite-books">My Fav Books</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-link" href="/add-book">Add a book</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="!hasAnyRole('USER', 'ADMIN')">
+                    <a class="nav-link" href="/sign-in">Sign In</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="!hasAnyRole('USER','ADMIN')">
+                    <a class="nav-link" href="/sign-up">Sign Up</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="hasAnyRole('USER','ADMIN')">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="row">
+    <div class="col-3"></div>
+<div class="col-6 mt-5" >
+    <form id="addNewBook">
+        <h5 class="text-center mt-1">Add New Book!</h5>
+      <div class="form-group">
+            <h6>ISBN</h6>
+            <input required type="text" name="isbn"  class="form-control" id="isbn">
+        </div>
+        <div class="form-group">
+            <h6>Title</h6>
+            <input required type="text" name="title" class="form-control" id="title">
+        </div>
+        <div class="form-group">
+            <h6>Author</h6>
+            <input required type="text" name="author" class="form-control" id="author">
+        </div>
+        <div class="form-row text-center mt-4">
+            <button  class="btn btn-outline-dark btn-block" role="button" id="addButton" type="button" aria-disabled="true">Add a book</button>
+        </div>
+    </form>
+</div>
+    <div class="col-3"></div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>
